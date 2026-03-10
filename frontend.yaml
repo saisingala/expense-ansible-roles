@@ -1,0 +1,5 @@
+- name: cinfigure frontend server
+  hosts: frontend
+  become: yes
+  roles:
+  - frontend
