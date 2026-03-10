@@ -1,0 +1,21 @@
+- name: remove existed code
+  ansible.builtin.file: 
+   path: "{{ app_location }}"
+   state: absent
+
+- name: create app directory
+  ansible.builtin.file:
+    path: "{{ app_location }}"
+    state: directory
+
+- name: "download the {{ component }} code"
+  ansible.builtin.unarchive:
+    url: "https://expense-builds.s3.us-east-1.amazonaws.com/expense-{{ component }}-v2.zip"
+    dest: "{{ app_location }}" 
+    remote_src: yes
+
+- name: extract the code
+  ansible.builtin.unarchive:
+    src: /tmp/backend.zip
+    dest: /app
+    remote_src: yes
