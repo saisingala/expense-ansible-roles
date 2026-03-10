@@ -17,5 +17,5 @@
 - name: extract the code
   ansible.builtin.unarchive:
     src: "/tmp/{{ component }}.zip"
-    dest: /app
+    dest: "{{ app_location }}"
     remote_src: yes
