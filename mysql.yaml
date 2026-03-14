@@ -1,7 +1,6 @@
 - name: configure mysql server
   hosts: mysql
   become: yes
-  ask_vault_pass: true
   vars_files:
   - /var/expense/credentials_mysql.yaml
   roles:
