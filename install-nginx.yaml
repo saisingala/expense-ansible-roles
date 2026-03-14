@@ -1,18 +1,13 @@
-- name: install nginx
-  hosts: all
-  become: yes
+- name: nginx install and run
+  hosts: web
+  become: yes #take sudo access
   tasks:
-  - name: print the stats
-    ansible.builtin.debug:
-       msg: " {{ansible_facts }} "
-  - name: install nginx if it is RedHat
-    ansible.builtin.dnf:
+  - name: install nginx
+    ansible.builtin.package: #HETEROGENOUS MODULE IT WORKS FOR ALL DISTRIBUTIONS
       name: nginx
       state: present
-    when: ansible_os_family == "RedHat"
-
-  - name: install nginx if it is debian
-    ansible.builtin.apt:
+  - name: run nginx
+    ansible.builtin.service:
       name: nginx
-      state: present
-    when: ansible_os_family == "debian"
+      state: started
+      enabled: yes
